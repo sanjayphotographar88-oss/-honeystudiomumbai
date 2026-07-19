@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honey Studio Mumbai - Photography</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #1a1a2e; color: #fff; }
+
+        /* Header */
+        header { background: #0f0f1a; padding: 20px; text-align: center; border-bottom: 3px solid #D4AF37; }
+        header h1 { color: #D4AF37; font-size: 36px; }
+        header p { color: #aaa; font-size: 14px; margin-top: 5px; }
+
+        /* Social Media Bar (Top) - Only 4 Icons */
+        .social-bar {
+            background: #252540;
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+        .social-bar a {
+            color: #fff;
+            font-size: 22px;
+            margin: 0 20px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .social-bar a:hover {
+            transform: translateY(-3px) scale(1.2);
+        }
+        .social-bar .fa-facebook-f:hover { color: #1877F2; }
+        .social-bar .fa-instagram:hover { color: #E4405F; }
+        .social-bar .fa-youtube:hover { color: #FF0000; }
+        .social-bar .fa-whatsapp:hover { color: #25D366; }
+
+        /* Navigation */
+        nav { background: #1a1a2e; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 100; }
+        nav a { color: #fff; text-decoration: none; margin: 0 12px; font-size: 13px; }
+        nav a:hover { color: #D4AF37; }
+
+        /* Hero */
+        .hero { background: #1a1a2e; padding: 80px 20px; text-align: center; }
+        .hero h2 { font-size: 48px; color: #D4AF37; margin-bottom: 10px; }
+        .hero p { color: #aaa; font-size: 18px; margin-bottom: 30px; }
+        .btn { display: inline-block; padding: 12px 30px; background: #D4AF37; color: #1a1a2e; text-decoration: none; font-weight: bold; margin: 5px; border-radius: 5px; }
+        .btn:hover { background: #F4D03F; }
+
+        /* Sections */
+        section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+        section h2 { color: #D4AF37; font-size: 32px; text-align: center; margin-bottom: 10px; }
+        .section-subtitle { text-align: center; color: #aaa; margin-bottom: 30px; }
+
+        /* About */
+        .about { background: #fff; color: #333; }
+        .about h2 { color: #1a1a2e; }
+        .about-content { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
+        .about-img { flex: 1; min-width: 300px; }
+        .about-img img { width: 100%; border-radius: 10px; }
+        .about-text { flex: 1; min-width: 300px; }
+        .about-text h3 { color: #1a1a2e; font-size: 24px; margin-bottom: 15px; }
+        .about-text p { color: #666; line-height: 1.6; margin-bottom: 15px; }
+
+        /* About Social - Only 4 Icons */
+        .about-social { margin-top: 20px; }
+        .about-social a {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            background: #1a1a2e;
+            color: #D4AF37;
+            text-align: center;
+            line-height: 45px;
+            border-radius: 50%;
+            margin: 0 8px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+        .about-social a:hover { transform: translateY(-3px); }
+        .about-social .fa-facebook-f:hover { background: #1877F2; color: #fff; }
+        .about-social .fa-instagram:hover { background: #E4405F; color: #fff; }
+        .about-social .fa-youtube:hover { background: #FF0000; color: #fff; }
+        .about-social .fa-whatsapp:hover { background: #25D366; color: #fff; }
+
+        /* Stats */
+        .stats { display: flex; gap: 20px; margin-top: 20px; }
+        .stat { background: #f8f9fa; padding: 20px; text-align: center; border-radius: 10px; flex: 1; }
+        .stat h4 { color: #D4AF37; font-size: 28px; }
+        .stat p { color: #666; font-size: 14px; }
+
+        /* Services */
+        .services { background: #1a1a2e; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .service-card { background: #252540; padding: 30px; text-align: center; border-radius: 10px; border: 1px solid #333; }
+        .service-card h3 { color: #D4AF37; margin-bottom: 10px; }
+        .service-card p { color: #aaa; font-size: 14px; }
+
+        /* Photo Gallery Sections */
+        .gallery-section { background: #fff; color: #333; padding: 60px 20px; }
+        .gallery-section:nth-child(even) { background: #f8f9fa; }
+        .gallery-section h2 { color: #1a1a2e; text-align: center; margin-bottom: 10px; }
+        .gallery-section .section-subtitle { text-align: center; color: #666; margin-bottom: 30px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; max-width: 1200px; margin: 0 auto; }
+        .gallery-item { position: relative; overflow: hidden; border-radius: 10px; cursor: pointer; }
+        .gallery-item img { width: 100%; height: 200px; object-fit: cover; transition: 0.3s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(26,26,46,0.7); display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay span { color: #D4AF37; font-size: 24px; }
+
+        /* Social Media Section - Only 4 Icons */
+        .social-section { background: #0f0f1a; padding: 60px 20px; text-align: center; }
+        .social-section h2 { color: #D4AF37; margin-bottom: 10px; }
+        .social-section p { color: #aaa; margin-bottom: 30px; }
+        .social-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .social-card {
+            background: #252540;
+            padding: 40px 50px;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s;
+            border: 1px solid #333;
+            text-align: center;
+        }
+        .social-card:hover { transform: translateY(-5px); }
+        .social-card i { font-size: 50px; margin-bottom: 15px; display: block; }
+        .social-card span { font-size: 16px; font-weight: bold; }
+        .social-card.facebook:hover { background: #1877F2; border-color: #1877F2; }
+        .social-card.instagram:hover { background: #E4405F; border-color: #E4405F; }
+        .social-card.youtube:hover { background: #FF0000; border-color: #FF0000; }
+        .social-card.whatsapp:hover { background: #25D366; border-color: #25D366; }
+
+        /* WhatsApp Section */
+        .whatsapp-section { background: #25D366; padding: 40px 20px; text-align: center; }
+        .whatsapp-section h2 { color: #fff; margin-bottom: 15px; }
+        .whatsapp-section p { color: rgba(255,255,255,0.9); margin-bottom: 20px; }
+        .whatsapp-btn { display: inline-block; padding: 15px 40px; background: #fff; color: #25D366; text-decoration: none; font-weight: bold; border-radius: 50px; font-size: 18px; }
+        .whatsapp-btn:hover { background: #f0f0f0; }
+        .whatsapp-btn i { margin-right: 8px; }
+
+        /* Contact */
+        .contact { background: #1a1a2e; }
+        .contact-info { text-align: center; }
+        .contact-item { margin: 15px 0; color: #aaa; }
+        .contact-item strong { color: #D4AF37; display: block; margin-bottom: 5px; }
+
+        /* Footer - Only 4 Icons */
+        footer { background: #0f0f1a; padding: 40px 20px; text-align: center; color: #666; }
+        .footer-social { margin-bottom: 20px; }
+        .footer-social a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: #252540;
+            color: #fff;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 50%;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+        .footer-social a:hover { transform: translateY(-3px); }
+        .footer-social .fa-facebook-f:hover { background: #1877F2; }
+        .footer-social .fa-instagram:hover { background: #E4405F; }
+        .footer-social .fa-youtube:hover { background: #FF0000; }
+        .footer-social .fa-whatsapp:hover { background: #25D366; }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        .whatsapp-float a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: #fff;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
+            transition: 0.3s;
+        }
+        .whatsapp-float a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37,211,102,0.6);
+        }
+        .whatsapp-label {
+            position: absolute;
+            right: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #25D366;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+        .whatsapp-float:hover .whatsapp-label { opacity: 1; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 32px; }
+            .about-content { flex-direction: column; }
+            .stats { flex-direction: column; }
+            nav a { display: inline-block; margin: 3px 8px; font-size: 12px; }
+            .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+            .whatsapp-float { bottom: 20px; right: 20px; }
+            .whatsapp-float a { width: 50px; height: 50px; font-size: 24px; }
+            .social-bar a { margin: 0 15px; font-size: 20px; }
+            .social-card { padding: 30px 40px; }
+            .social-card i { font-size: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Honey Studio</h1>
+        <p>Professional Photography - Mumbai</p>
+    </header>
+
+    <!-- Social Media Bar (Top) - Only 4 Icons -->
+    <div class="social-bar">
+        <a href="https://facebook.com/honeystudio" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com/honeystudio" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://youtube.com/honeystudio" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://wa.me/919876543210" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#wedding">Wedding</a>
+        <a href="#haldi">Haldi</a>
+        <a href="#mehndi">Mehndi</a>
+        <a href="#birthday">Birthday</a>
+        <a href="#prewedding">Pre-Wedding</a>
+        <a href="#baby">Baby</a>
+        <a href="#corporate">Corporate</a>
+        <a href="#fashion">Fashion</a>
+        <a href="#social">Follow Us</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero" id="home">
+        <h2>Capture Your Moments</h2>
+        <p>Wedding | Haldi | Mehndi | Birthday | Pre-Wedding | Baby Shoot | Corporate | Fashion</p>
+        <a href="#wedding" class="btn">View Portfolio</a>
+        <a href="https://wa.me/919876543210" class="btn">WhatsApp Us</a>
+    </div>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <h2>About Us</h2>
+        <div class="about-content">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=600" alt="Studio">
+            </div>
+            <div class="about-text">
+                <h3>We Create Memories</h3>
+                <p>Honey Studio Mumbai is a premier photography studio dedicated to capturing life's most precious moments. With state-of-the-art equipment and creative professionals, we deliver stunning visuals.</p>
+                <p>From weddings to corporate events, fashion shoots to family portraits - we bring your vision to life.</p>
+                <div class="stats">
+                    <div class="stat"><h4>500+</h4><p>Projects</p></div>
+                    <div class="stat"><h4>50+</h4><p>Clients</p></div>
+                    <div class="stat"><h4>10+</h4><p>Years</p></div>
+                </div>
+                <div class="about-social">
+                    <a href="https://facebook.com/honeystudio" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com/honeystudio" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com/honeystudio" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://wa.me/919876543210" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <h2>Our Services</h2>
+        <p class="section-subtitle">What we offer to our clients</p>
+        <div class="services-grid">
+            <div class="service-card"><h3>Wedding Photography</h3><p>Capture your special day with stunning candid and traditional shots</p></div>
+            <div class="service-card"><h3>Haldi Ceremony</h3><p>Colorful and joyful moments of your haldi ceremony</p></div>
+            <div class="service-card"><h3>Mehndi Shoot</h3><p>Beautiful mehndi designs and candid moments</p></div>
+            <div class="service-card"><h3>Birthday Shoot</h3><p>Celebrate your special day with memorable photos</p></div>
+            <div class="service-card"><h3>Pre-Wedding</h3><p>Romantic pre-wedding shoots at beautiful locations</p></div>
+            <div class="service-card"><h3>Baby Shoot</h3><p>Adorable moments of your little ones</p></div>
+            <div class="service-card"><h3>Corporate Events</h3><p>Professional coverage for business events</p></div>
+            <div class="service-card"><h3>Fashion Portfolio</h3><p>High-end fashion and model portfolio shoots</p></div>
+        </div>
+    </section>
+
+    <!-- WEDDING SECTION -->
+    <div class="gallery-section" id="wedding">
+        <h2>Wedding Photography</h2>
+        <p class="section-subtitle">Capturing your special day with love and perfection</p>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400" alt="Wedding 1"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400" alt="Wedding 2"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400" alt="Wedding 3"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=400" alt="Wedding 4"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=400" alt="Wedding 5"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=400" alt="Wedding 6"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=400" alt="Wedding 7"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=400" alt="Wedding 8"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=400" alt="Wedding 9"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544078751-58fee2d8a03b?w=400" alt="Wedding 10"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1596386461350-32636b2f3ef9?w=400" alt="Wedding 11"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=400" alt="Wedding 12"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400" alt="Wedding 13"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=400" alt="Wedding 14"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400" alt="Wedding 15"><div class="gallery-overlay"><span>+</span></div></div>
+        </div>
+    </div>
+
+    <!-- HALDI SECTION -->
+    <div class="gallery-section" id="haldi">
+        <h2>Haldi Ceremony</h2>
+        <p class="section-subtitle">Colorful moments of joy and tradition</p>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=400" alt="Haldi 1"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=400" alt="Haldi 2"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=400" alt="Haldi 3"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=400" alt="Haldi 4"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=400" alt="Haldi 5"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=400" alt="Haldi 6"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544078751-58fee2d8a03b?w=400" alt="Haldi 7"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1596386461350-32636b2f3ef9?w=400" alt="Haldi 8"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=400" alt="Haldi 9"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400" alt="Haldi 10"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=400" alt="Haldi 11"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400" alt="Haldi 12"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400" alt="Haldi 13"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400" alt="Haldi 14"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400" alt="Haldi 15"><div class="gallery-overlay"><span>+</span></div></div>
+        </div>
+    </div>
+
+    <!-- MEHNDI SECTION -->
+    <div class="gallery-section" id="mehndi">
+        <h2>Mehndi Shoot</h2>
+        <p class="section-subtitle">Beautiful henna designs and candid moments</p>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=400" alt="Mehndi 1"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=400" alt="Mehndi 2"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=400" alt="Mehndi 3"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=400" alt="Mehndi 4"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=400" alt="Mehndi 5"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544078751-58fee2d8a03b?w=400" alt="Mehndi 6"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1596386461350-32636b2f3ef9?w=400" alt="Mehndi 7"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=400" alt="Mehndi 8"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400" alt="Mehndi 9"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=400" alt="Mehndi 10"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400" alt="Mehndi 11"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400" alt="Mehndi 12"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400" alt="Mehndi 13"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400" alt="Mehndi 14"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=400" alt="Mehndi 15"><div class="gallery-overlay"><span>+</span></div></div>
+        </div>
+    </div>
+
+    <!-- BIRTHDAY SECTION -->
+    <div class="gallery-section" id="birthday">
+        <h2>Birthday Shoot</h2>
+        <p class="section-subtitle">Celebrate your special day with memorable photos</p>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400" alt="Birthday 1"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400" alt="Birthday 2"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400" alt="Birthday 3"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?w=400" alt="Birthday 4"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?w=400" alt="Birthday 5"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400" alt="Birthday 6"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400" alt="Birthday 7"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400" alt="Birthday 8"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400" alt="Birthday 9"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?w=400" alt="Birthday 10"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?w=400" alt="Birthday 11"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400" alt="Birthday 12"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400" alt="Birthday 13"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400" alt="Birthday 14"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400" alt="Birthday 15"><div class="gallery-overlay"><span>+</span></div></div>
+        </div>
+    </div>
+
+    <!-- PRE-WEDDING SECTION -->
+    <div class="gallery-section" id="prewedding">
+        <h2>Pre-Wedding Shoot</h2>
+        <p class="section-subtitle">Romantic moments before the big day</p>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400" alt="Pre-Wedding 1"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400" alt="Pre-Wedding 2"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=400" alt="Pre-Wedding 3"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=400" alt="Pre-Wedding 4"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=400" alt="Pre-Wedding 5"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=400" alt="Pre-Wedding 6"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=400" alt="Pre-Wedding 7"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=400" alt="Pre-Wedding 8"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544078751-58fee2d8a03b?w=400" alt="Pre-Wedding 9"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1596386461350-32636b2f3ef9?w=400" alt="Pre-Wedding 10"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=400" alt="Pre-Wedding 11"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400" alt="Pre-Wedding 12"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=400" alt="Pre-Wedding 13"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400" alt="Pre-Wedding 14"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400" alt="Pre-Wedding 15"><div class="gallery-overlay"><span>+</span></div></div>
+        </div>
+    </div>
+
+    <!-- BABY SHOOT SECTION -->
+    <div class="gallery-section" id="baby">
+        <h2>Baby Shoot</h2>
+        <p class="section-subtitle">Adorable moments of your little ones</p>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=400" alt="Baby 1"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=400" alt="Baby 2"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=400" alt="Baby 3"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=400" alt="Baby 4"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=400" alt="Baby 5"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=400" alt="Baby 6"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=400" alt="Baby 7"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=400" alt="Baby 8"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=400" alt="Baby 9"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=400" alt="Baby 10"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=400" alt="Baby 11"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=400" alt="Baby 12"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=400" alt="Baby 13"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=400" alt="Baby 14"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=400" alt="Baby 15"><div class="gallery-overlay"><span>+</span></div></div>
+        </div>
+    </div>
+
+    <!-- CORPORATE SECTION -->
+    <div class="gallery-section" id="corporate">
+        <h2>Corporate Events</h2>
+        <p class="section-subtitle">Professional coverage for business events</p>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400" alt="Corporate 1"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=400" alt="Corporate 2"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=400" alt="Corporate 3"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400" alt="Corporate 4"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400" alt="Corporate 5"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=400" alt="Corporate 6"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=400" alt="Corporate 7"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400" alt="Corporate 8"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400" alt="Corporate 9"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=400" alt="Corporate 10"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=400" alt="Corporate 11"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400" alt="Corporate 12"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400" alt="Corporate 13"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=400" alt="Corporate 14"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=400" alt="Corporate 15"><div class="gallery-overlay"><span>+</span></div></div>
+        </div>
+    </div>
+
+    <!-- FASHION SECTION -->
+    <div class="gallery-section" id="fashion">
+        <h2>Fashion Portfolio</h2>
+        <p class="section-subtitle">High-end fashion and model portfolio shoots</p>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400" alt="Fashion 1"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400" alt="Fashion 2"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400" alt="Fashion 3"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=400" alt="Fashion 4"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400" alt="Fashion 5"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400" alt="Fashion 6"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400" alt="Fashion 7"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=400" alt="Fashion 8"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400" alt="Fashion 9"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400" alt="Fashion 10"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400" alt="Fashion 11"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=400" alt="Fashion 12"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400" alt="Fashion 13"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400" alt="Fashion 14"><div class="gallery-overlay"><span>+</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400" alt="Fashion 15"><div class="gallery-overlay"><span>+</span></div></div>
+        </div>
+    </div>
+
+    <!-- Social Media Section - Only 4 Icons -->
+    <div class="social-section" id="social">
+        <h2>Follow Us on Social Media</h2>
+        <p>Stay connected with Honey Studio Mumbai</p>
+        <div class="social-grid">
+            <a href="https://facebook.com/honeystudio" target="_blank" class="social-card facebook">
+                <i class="fab fa-facebook-f"></i>
+                <span>Facebook</span>
+            </a>
+            <a href="https://instagram.com/honeystudio" target="_blank" class="social-card instagram">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+            <a href="https://youtube.com/honeystudio" target="_blank" class="social-card youtube">
+                <i class="fab fa-youtube"></i>
+                <span>YouTube</span>
+            </a>
+            <a href="https://wa.me/919876543210" target="_blank" class="social-card whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- WhatsApp Section -->
+    <div class="whatsapp-section">
+        <h2>Book Your Shoot Now!</h2>
+        <p>Contact us on WhatsApp for instant booking and inquiries</p>
+        <a href="https://wa.me/919876543210" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+    </div>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-info">
+            <div class="contact-item"><strong>Location</strong>123, Film City Road, Andheri West, Mumbai - 400053</div>
+            <div class="contact-item"><strong>Phone</strong>+91 98765 43210</div>
+            <div class="contact-item"><strong>Email</strong>info@honeystudio.in</div>
+            <div class="contact-item"><strong>Working Hours</strong>Mon - Sat: 10:00 AM - 8:00 PM</div>
+        </div>
+    </section>
+
+    <!-- Footer - Only 4 Icons -->
+    <footer>
+        <div class="footer-social">
+            <a href="https://facebook.com/honeystudio" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com/honeystudio" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/honeystudio" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://wa.me/919876543210" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>Honey Studio Mumbai. All Rights Reserved.</p>
+        <p style="margin-top: 10px; font-size: 12px;">Follow us on social media for latest updates</p>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/919876543210" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <div class="whatsapp-label">Chat on WhatsApp</div>
+    </div>
+
+</body>
+</html>
